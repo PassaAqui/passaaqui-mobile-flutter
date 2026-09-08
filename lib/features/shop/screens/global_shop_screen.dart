@@ -5,10 +5,6 @@ class GlobalShopScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Global Shop Screen'),
-      ),
-    );
+    return const Scaffold(body: Center(child: Text('Global Shop Screen')));
   }
 }
