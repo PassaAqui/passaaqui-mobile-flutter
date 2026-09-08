@@ -8,9 +8,7 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Product Detail Screen - ID: $productId'),
-      ),
+      body: Center(child: Text('Product Detail Screen - ID: $productId')),
     );
   }
 }

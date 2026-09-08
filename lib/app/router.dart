@@ -46,8 +46,6 @@ final GoRouter appRouter = GoRouter(
     ),
   ],
   errorBuilder: (context, state) => Scaffold(
-    body: Center(
-      child: Text('Página não encontrada: ${state.uri}'),
-    ),
+    body: Center(child: Text('Página não encontrada: ${state.uri}')),
   ),
 );
