@@ -1,16 +1,38 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/home/screens/home_screen.dart';
-import '../../features/auth/screens/login_screen.dart';
-import '../../features/auth/screens/signup_screen.dart';
-import '../../features/map/screens/map_screen.dart';
-import '../../features/shop/screens/global_shop_screen.dart';
-import '../../features/shop/screens/product_detail_screen.dart';
+import 'package:passaaqui_mobile_flutter/features/home/screens/home_screen.dart';
+import 'package:passaaqui_mobile_flutter/features/auth/screens/login_screen.dart';
+import 'package:passaaqui_mobile_flutter/features/auth/screens/signup_screen.dart';
+import 'package:passaaqui_mobile_flutter/features/map/screens/map_screen.dart';
+import 'package:passaaqui_mobile_flutter/features/shop/screens/global_shop_screen.dart';
+import 'package:passaaqui_mobile_flutter/features/shop/screens/product_detail_screen.dart';
+
+import 'navigation/scaffold_with_nav_bar.dart';
+
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final _shellNavigatorMapKey = GlobalKey<NavigatorState>(debugLabel: "shellMap");
 
 final GoRouter appRouter = GoRouter(
+  navigatorKey: _rootNavigatorKey,
   initialLocation: '/home',
   routes: [
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return ScaffoldWithNavBar(navigationShell: navigationShell);
+      },
+      branches: [
+        StatefulShellBranch(
+          navigatorKey: _shellNavigatorMapKey,
+          routes: [
+            GoRoute(
+              path: "/map",
+              builder: (context, state) => const MapScreen(),
+            ),
+          ],
+        ),
+      ],
+    ),
     GoRoute(
       path: '/home',
       name: 'home',
@@ -25,11 +47,6 @@ final GoRouter appRouter = GoRouter(
       path: '/signup',
       name: 'signup',
       builder: (context, state) => const SignupScreen(),
-    ),
-    GoRoute(
-      path: '/map',
-      name: 'map',
-      builder: (context, state) => const MapScreen(),
     ),
     GoRoute(
       path: '/shop',
