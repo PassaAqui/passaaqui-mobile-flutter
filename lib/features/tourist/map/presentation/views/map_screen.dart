@@ -14,6 +14,8 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   late final String mapStyleUrl;
 
+  MapLibreMapController? mapController;
+
   @override
   void initState() {
     super.initState();
@@ -26,6 +28,27 @@ class _MapScreenState extends State<MapScreen> {
 
     mapStyleUrl =
         "https://api.maptiler.com/maps/01a08c63-b260-733f-8081-77da900e16c0/style.json?key=$mapTilerKey";
+  }
+
+  Future<void> _addTouristLocationMarker() async {
+    if (mapController == null) return;
+
+    final ByteData touristMarker = await rootBundle.load(
+      'assets/images/tourist/map/tourist-marker.png',
+    );
+
+    await mapController?.addImage(
+      'tourist-marker',
+      touristMarker.buffer.asUint8List(),
+    );
+
+    await mapController?.addSymbol(
+      const SymbolOptions(
+        geometry: LatLng(-8.0675, -34.9167), // Centro de Recife)
+        iconImage: 'tourist-marker',
+        iconSize: 1.0,
+      ),
+    );
   }
 
   @override
@@ -41,7 +64,7 @@ class _MapScreenState extends State<MapScreen> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 70,
+          toolbarHeight: 80,
           title: MapHeader(userName: "Nome do usuario", xpAmount: 0),
         ),
         body: MapLibreMap(
@@ -51,6 +74,16 @@ class _MapScreenState extends State<MapScreen> {
             tilt: 60,
           ),
           styleString: mapStyleUrl,
+          myLocationEnabled: true,
+          myLocationTrackingMode: MyLocationTrackingMode.none,
+
+          onMapCreated: (controller) {
+            mapController = controller;
+          },
+
+          onStyleLoadedCallback: () {
+            _addTouristLocationMarker();
+          },
         ),
       ),
     );
