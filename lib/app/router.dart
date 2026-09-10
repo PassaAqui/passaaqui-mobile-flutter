@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:passaaqui_mobile_flutter/features/home/screens/home_screen.dart';
 import 'package:passaaqui_mobile_flutter/features/tourist/auth/screens/login_screen.dart';
 import 'package:passaaqui_mobile_flutter/features/tourist/auth/screens/signup_screen.dart';
-import 'package:passaaqui_mobile_flutter/features/tourist/map/screens/map_screen.dart';
+import 'package:passaaqui_mobile_flutter/features/tourist/map/presentation/views/map_screen.dart';
 import 'package:passaaqui_mobile_flutter/features/tourist/shop/screens/global_shop_screen.dart';
 import 'package:passaaqui_mobile_flutter/features/tourist/shop/screens/product_detail_screen.dart';
 
@@ -15,7 +15,7 @@ final _shellNavigatorMapKey = GlobalKey<NavigatorState>(debugLabel: "shellMap");
 
 final GoRouter appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/home',
+  initialLocation: '/map',
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
