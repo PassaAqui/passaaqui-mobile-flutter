@@ -21,6 +21,10 @@ class ScaffoldWithNavBar extends StatelessWidget {
             icon: Icon(Icons.map_outlined),
             label: "Mapa",
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag_rounded),
+            label: "Loja",
+          ),
         ],
       ),
     );
